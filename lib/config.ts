@@ -18,6 +18,22 @@ export const APP_CONFIG = {
 
 export const MONITORED_ITEMS: MonitoredItem[] = [
   {
+    id: "teste-butterfly-venda",
+    name: "Teste API butterfly venda",
+    marketUrl:
+      "https://steamcommunity.com/market/listings/730/%E2%98%85%20Butterfly%20Knife%20|%20Freehand%20(Field-Tested)",
+    targetPrice: 4000,
+    triggerType: "venda",
+  },
+  {
+    id: "teste-butterfly-compra",
+    name: "Teste API butterfly compra",
+    marketUrl:
+      "https://steamcommunity.com/market/listings/730/%E2%98%85%20Butterfly%20Knife%20|%20Freehand%20(Field-Tested)",
+    targetPrice: 7000,
+    triggerType: "compra",
+  },
+  {
     id: "wizard-beard",
     name: "Wizard Beard",
     marketUrl:
