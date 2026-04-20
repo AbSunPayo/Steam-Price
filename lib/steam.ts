@@ -3,6 +3,7 @@ import { APP_CONFIG, MonitoredItem } from "@/lib/config";
 export interface SteamItemSnapshot {
   itemId: string;
   name: string;
+  appId: string;
   marketHashName: string;
   marketUrl: string;
   currentPrice: number;
@@ -12,13 +13,16 @@ export interface SteamItemSnapshot {
   targetReached: boolean;
 }
 
-function extractMarketHashName(marketUrl: string) {
-  const match = marketUrl.match(/\/market\/listings\/730\/(.+)$/);
-  if (!match?.[1]) {
+function extractMarketData(marketUrl: string) {
+  const match = marketUrl.match(/\/market\/listings\/(\d+)\/(.+)$/);
+  if (!match?.[1] || !match?.[2]) {
     throw new Error(`Link inválido do Steam Market: ${marketUrl}`);
   }
 
-  return decodeURIComponent(match[1]);
+  return {
+    appId: match[1],
+    marketHashName: decodeURIComponent(match[2]),
+  };
 }
 
 function normalizeSteamPrice(value: string) {
@@ -48,10 +52,10 @@ function reachedTarget(
 export async function fetchSteamSnapshot(
   item: MonitoredItem,
 ): Promise<SteamItemSnapshot> {
-  const marketHashName = extractMarketHashName(item.marketUrl);
+  const { appId, marketHashName } = extractMarketData(item.marketUrl);
   const apiUrl =
     "https://steamcommunity.com/market/priceoverview/" +
-    `?appid=730&currency=${APP_CONFIG.currencyCode}` +
+    `?appid=${appId}&currency=${APP_CONFIG.currencyCode}` +
     `&market_hash_name=${encodeURIComponent(marketHashName)}`;
 
   const controller = new AbortController();
@@ -95,6 +99,7 @@ export async function fetchSteamSnapshot(
     return {
       itemId: item.id,
       name: item.name,
+      appId,
       marketHashName,
       marketUrl: item.marketUrl,
       currentPrice,
