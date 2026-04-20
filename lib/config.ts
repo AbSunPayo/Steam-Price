@@ -13,7 +13,7 @@ export const APP_CONFIG = {
   requestTimeoutMs: 20000,
   delayBetweenItemsMs: 1500,
   discordWebhookUrl:
-    "COLE_AQUI_O_WEBHOOK_DO_DISCORD",
+    "https://discord.com/api/webhooks/1431261278847897656/KE0FhOVNgA2iLx6bWOEf1mRWOm7Sm0Z8hgvquwVI5Mxrev7N5LTefUg9QjF7DqmaV195",
 } as const;
 
 export const MONITORED_ITEMS: MonitoredItem[] = [
