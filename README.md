@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # CounterStrike Price API
 
 MVP de API sem banco para monitorar itens do Steam Market e enviar alerta no Discord.
@@ -105,3 +106,7 @@ Depois da API estável, fazemos um front separado em HTML estático para subir n
 - mostrar nome, link e preço atual
 - chamar a API hosteada para rodar a verificação manual
 - futuramente trocar config hardcoded por um JSON estático versionado
+=======
+# Steam-Price
+Repositorio para uma API de steam price
+>>>>>>> b15217f61c86a7cfa3a4696d3097b9705da08a09
