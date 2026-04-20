@@ -7,6 +7,7 @@ interface DiscordAlertInput {
   displayPrice: string;
   targetPrice: number;
   triggerType: TriggerType;
+  imageUrl?: string;
 }
 
 export async function sendDiscordAlert(input: DiscordAlertInput) {
@@ -16,7 +17,7 @@ export async function sendDiscordAlert(input: DiscordAlertInput) {
     return {
       success: false,
       skipped: true,
-      error: "Webhook do Discord não configurado no código.",
+      error: "Webhook do Discord nao configurado no codigo.",
     };
   }
 
@@ -26,7 +27,43 @@ export async function sendDiscordAlert(input: DiscordAlertInput) {
       : "Venda: subiu para o alvo";
 
   const color = input.triggerType === "compra" ? 0x2ecc71 : 0xe74c3c;
-  const directionEmoji = input.triggerType === "compra" ? "DOWN" : "UP";
+  const directionEmoji = input.triggerType === "compra" ? "Baixa" : "Alta";
+
+  const embed: Record<string, unknown> = {
+    title: `${directionEmoji} ${input.name}`,
+    description:
+      "A condicao configurada foi atingida para este item do Steam Market.",
+    color,
+    fields: [
+      {
+        name: "Preco atual",
+        value: input.displayPrice,
+        inline: true,
+      },
+      {
+        name: "Preco alvo",
+        value: `R$ ${input.targetPrice.toFixed(2)}`,
+        inline: true,
+      },
+      {
+        name: "Regra",
+        value: triggerLabel,
+        inline: false,
+      },
+      {
+        name: "Link",
+        value: input.marketUrl,
+        inline: false,
+      },
+    ],
+    timestamp: new Date().toISOString(),
+  };
+
+  if (input.imageUrl?.trim()) {
+    embed.thumbnail = {
+      url: input.imageUrl.trim(),
+    };
+  }
 
   const response = await fetch(webhookUrl, {
     method: "POST",
@@ -35,36 +72,7 @@ export async function sendDiscordAlert(input: DiscordAlertInput) {
     },
     body: JSON.stringify({
       username: "CS Price Alert",
-      embeds: [
-        {
-          title: `${directionEmoji} ${input.name}`,
-          description: `A condição configurada foi atingida para este item do Steam Market.`,
-          color,
-          fields: [
-            {
-              name: "Preço atual",
-              value: input.displayPrice,
-              inline: true,
-            },
-            {
-              name: "Preço alvo",
-              value: `R$ ${input.targetPrice.toFixed(2)}`,
-              inline: true,
-            },
-            {
-              name: "Regra",
-              value: triggerLabel,
-              inline: false,
-            },
-            {
-              name: "Link",
-              value: input.marketUrl,
-              inline: false,
-            },
-          ],
-          timestamp: new Date().toISOString(),
-        },
-      ],
+      embeds: [embed],
     }),
   });
 

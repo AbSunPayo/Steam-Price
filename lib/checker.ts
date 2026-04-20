@@ -26,6 +26,7 @@ export async function runPriceCheck() {
           displayPrice: snapshot.displayPrice,
           targetPrice: snapshot.targetPrice,
           triggerType: snapshot.triggerType,
+          imageUrl: item.imageUrl,
         });
 
         if (discord.success) {
