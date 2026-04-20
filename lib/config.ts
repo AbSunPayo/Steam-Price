@@ -41,7 +41,7 @@ export const MONITORED_ITEMS: MonitoredItem[] = [
     name: "Wizard Hat",
     marketUrl:
       "https://steamcommunity.com/market/listings/590830/Wizard%20Hat",
-    targetPrice: 250,
+    targetPrice: 300,
     triggerType: "venda",
     imageUrl: "https://community.akamai.steamstatic.com/economy/image/ev_QInFv2QSGCJrUcil4gJtKJmC--iK8V6noG26JnNatlorh-FOKKpkoZp2Yx_4DKQHYjMloPzv4OvDUnX7pLA7g7ulJaQVeuM8/330x192?allow_animated=1",
   },
@@ -50,7 +50,7 @@ export const MONITORED_ITEMS: MonitoredItem[] = [
     name: "SWAG Chain",
     marketUrl:
       "https://steamcommunity.com/market/listings/590830/SWAG%20Chain",
-    targetPrice: 150,
+    targetPrice: 200,
     triggerType: "venda",
     imageUrl: "https://community.akamai.steamstatic.com/economy/image/ev_QInFv2QSGCJrUcil4gJtKJmCq-T22QuKhSyeCnNL_wou88R6JI5krfpuYwPxPcALYjddvaW-rbbjYniPiKlqqpuQcwk3_YPRkVfYmiDgSRa5s/330x192?allow_animated=1",
   },
@@ -59,7 +59,7 @@ export const MONITORED_ITEMS: MonitoredItem[] = [
     name: "Bag",
     marketUrl:
       "https://steamcommunity.com/market/listings/590830/Bag",
-    targetPrice: 40,
+    targetPrice: 50,
     triggerType: "venda",
     imageUrl: "https://community.akamai.steamstatic.com/economy/image/ev_QInFv2QSGCJrUcil4gJtKJmCq-T22QuKlQ3CGnNb4xd7moUSMIpx7Lc2awftIIFGKgtU6PTivOLjYminjLA74_ORNw0D1NaMxVfYmiLXZVcQC/330x192?allow_animated=1",
   },
